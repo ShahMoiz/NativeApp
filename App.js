@@ -10,48 +10,51 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, ScrollView, Image, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 
 import AddPlaceComponent from './src/components/AddPlace/addPlace';
-import PlaceList from './src/components/PlaceList/placeList';
+import PlaceContentComponent from './src/components/placesContent/placesContent';
+import SampleImage from './src/assets/karachi.jpg';
+import PlaceDetailModal from './src/components/placeDetail/placeDetail';
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addPlaceText: '',
-      places: ['Hello', 'World']
+      // addPlaceText: '',
+      places: [{name: 'Karachi', id: Math.random(), img: SampleImage}]
     }
-    // this.addPlaceHandler = this.addPlaceHandler.bind(this)
   }
-  changeInputText = (text) => {
-    this.setState({ addPlaceText: text })
-  }
-  addPlaceHandler = () => {
-    // alert(this.state.addPlaceText)
-    if (this.state.addPlaceText.trim() === '') { return; }
+
+
+  addPlaceHandler = (text) => {
+    if (text.trim() === '') return; 
+      
+
     this.setState((prevState) => ({
-      places: prevState.places.concat(prevState.addPlaceText),
+      places: prevState.places.concat({name: text, id: Math.random(), img: SampleImage}),
     }))
   }
+
   deletePlace = (index) => {
-    const updatedArray = this.state.places.filter((place, i) => i !== index)
+    // alert(index)
+    const updatedArray = this.state.places.filter(place => place.id !== index)
     this.setState({ places: updatedArray })
   }
+
   render() {
-    const placesName = this.state.places.map((place, i) => (
-      <TouchableOpacity key={i} onPress={() => this.deletePlace(i)}>
-        <PlaceList placeName={place} />
-      </TouchableOpacity>
-    ))
+    
     return (
       <View style={styles.container}>
-        <AddPlaceComponent 
-          submithandler={this.addPlaceHandler} 
-          changeText={this.changeInputText} 
+        <PlaceDetailModal
+        places={this.state.places}
         />
 
-        <ScrollView >
-          {
-            placesName
-          }
-        </ScrollView>
+        <AddPlaceComponent 
+          submithandler={this.addPlaceHandler}
+        />
+
+        <PlaceContentComponent
+        places={this.state.places}
+        deletePlace={this.deletePlace}
+        />
       </View>
     );
   }
