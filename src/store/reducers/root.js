@@ -1,16 +1,15 @@
 import {ADD_PLACE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE} from '../actions/actionTypes';
-import { addPlace, deletePlace, selectPlace, deselectPlace } from '../actions/index.js';
 
 const initialState = {
     selectedItem: null,
-    places: [{ name: 'Karachi', id: Math.random(), img: SampleImage }]
+    places: []
 }
 
-export const reducer = (state = initialState, action) => {
+ const reducer = (state = initialState, action) => {
     switch(action.type){
         case ADD_PLACE:
         return {
-            ...state
+            ...state,
             places: state.places.concat({ 
                 name: action.placeName, 
                 id: Math.random(), 
@@ -18,18 +17,23 @@ export const reducer = (state = initialState, action) => {
         }
         case DELETE_PLACE:
             return {
+                ...state,
                 places: state.places.filter(place => place.id !== state.selectedItem.id),
                 selectedItem: null
             }
         case SELECT_PLACE:
             return {
+                ...state,
                 selectedItem: state.places.find(place => place.id === action.id)
             }
-        case DELETE_PLACE:
+        case DESELECT_PLACE:
             return {
+                ...state,
                 selectedItem: null
             }
-        default
+        default:
         return state
     }
 }
+
+export default reducer
