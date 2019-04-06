@@ -1,6 +1,5 @@
 import React from 'react';
-import {View,Image, Text, StyleSheet} from 'react-native';
-// import SampleImage from '../../assets/karachi.jpg'
+import {View, Image, Text, StyleSheet} from 'react-native';
 
 const ListItem = (props) => (
     <View key={props.place.id} style={styles.placeNameContent}>

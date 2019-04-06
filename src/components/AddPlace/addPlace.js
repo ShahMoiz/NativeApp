@@ -15,19 +15,20 @@ class AddPlaceComponent extends Component {
     render(){
     return (
     <View style={styles.inputContainer}>
-    {/* <Text>Hello</Text> */}
         <TextInput 
           style={styles.inputContainerInput}
           placeholder="Add Place Here"
           onChangeText={text => this.setState({placeText: text})}
+          value={this.state.placeText}
           />
         <Button 
           title="Add"
           style={styles.inputContainerButton}
-          onPress={() => this.props.submithandler(this.state.placeText)}
+          onPress={() => {
+            this.props.submithandler(this.state.placeText)
+            this.setState({placeText: ''});
+          }}
           />
-
-{/* onPress={() => this.props.submithandler(this.state.placeText)} */}
     </View>
     )
     }

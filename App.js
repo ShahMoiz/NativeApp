@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, ScrollView, Image, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import AddPlaceComponent from './src/components/AddPlace/addPlace';
 import PlaceContentComponent from './src/components/placesContent/placesContent';
@@ -17,41 +17,39 @@ export default class App extends Component {
   }
 
 
-  addPlaceHandler = (text) => {
+  addPlaceHandler = text => {
     if (text.trim() === '') return;
-
 
     this.setState((prevState) => ({
       places: prevState.places.concat({ name: text, id: Math.random(), img: SampleImage }),
     }))
   }
 
-  // deletePlace = (index) => {
-  //   // alert(index)
-  //   const updatedArray = this.state.places.filter(place => place.id !== index)
-  //   this.setState({ places: updatedArray })
-  // }
+  dltSelectedItemHandler = () => {
+    const updatedArray = this.state.places.filter(place => place.id !== this.state.selectedItem.id);
+
+    this.setState({ places: updatedArray, selectedItem: null })
+  }
 
   selectedPlaceHandler = (id) => {
-    // alert(id);
     this.setState(prevState => ({
       selectedItem: this.state.places.find(place => place.id===id)
     }))
   }
 
   closeModalhandler= () => {
-    // alert("hello")
     this.setState({
       selectedItem: null
     })
   }
   render() {
-
     return (
       <View style={styles.container}>
+
         <PlaceDetailModal
           selectedItem={this.state.selectedItem}
           closeModal={this.closeModalhandler}
+          deleteModal={this.dltSelectedItemHandler}
         />
 
         <AddPlaceComponent
@@ -62,6 +60,7 @@ export default class App extends Component {
           places={this.state.places}
           selectedPlace={this.selectedPlaceHandler}
         />
+
       </View>
     );
   }
@@ -71,9 +70,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    flexDirection: 'column',
-    // justifyContent: 'center'
-    // borderWidth: 1
+    flexDirection: 'column'
   },
 
 })

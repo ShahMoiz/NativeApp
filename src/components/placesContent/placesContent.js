@@ -1,18 +1,16 @@
 import React from 'react';
-import { ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import {FlatList, TouchableOpacity } from 'react-native';
 
 import ListItem from '../ListItem/listItem';
 
 const PlaceContentComponent = props => {
-  // <TouchableOpacity key={place.id} onPress={() => props.deletePlace(place.id)}>
-  //   <ListItem placeName={place.name} />
-  // </TouchableOpacity>
-
+  _keyExtractor = (item, index) => index.toString();
   return (
     <FlatList
       data={props.places}
+      keyExtractor={this._keyExtractor}
       renderItem={({ item }) =>
-        <TouchableOpacity key={item.key} onPress={() => props.selectedPlace(item.id)}>
+        <TouchableOpacity onPress={() => props.selectedPlace(item.id)}>
           <ListItem place={item} />
         </TouchableOpacity>
       }
