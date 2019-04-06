@@ -21,7 +21,7 @@ export default class App extends Component {
     if (text.trim() === '') return;
 
     this.setState((prevState) => ({
-      places: prevState.places.concat({ name: text, id: Math.random(), img: SampleImage }),
+      places: prevState.places.concat({ name: text, id: Math.random(), img: {uri: 'https://www.acupofkarachi.com/wp-content/uploads/2017/04/Do-Darya800445.jpg'} }),
     }))
   }
 
