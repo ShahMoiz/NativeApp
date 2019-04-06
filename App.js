@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, ScrollView, Image, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
@@ -18,42 +11,56 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // addPlaceText: '',
-      places: [{name: 'Karachi', id: Math.random(), img: SampleImage}]
+      selectedItem: null,
+      places: [{ name: 'Karachi', id: Math.random(), img: SampleImage }]
     }
   }
 
 
   addPlaceHandler = (text) => {
-    if (text.trim() === '') return; 
-      
+    if (text.trim() === '') return;
+
 
     this.setState((prevState) => ({
-      places: prevState.places.concat({name: text, id: Math.random(), img: SampleImage}),
+      places: prevState.places.concat({ name: text, id: Math.random(), img: SampleImage }),
     }))
   }
 
-  deletePlace = (index) => {
-    // alert(index)
-    const updatedArray = this.state.places.filter(place => place.id !== index)
-    this.setState({ places: updatedArray })
+  // deletePlace = (index) => {
+  //   // alert(index)
+  //   const updatedArray = this.state.places.filter(place => place.id !== index)
+  //   this.setState({ places: updatedArray })
+  // }
+
+  selectedPlaceHandler = (id) => {
+    // alert(id);
+    this.setState(prevState => ({
+      selectedItem: this.state.places.find(place => place.id===id)
+    }))
   }
 
+  closeModalhandler= () => {
+    // alert("hello")
+    this.setState({
+      selectedItem: null
+    })
+  }
   render() {
-    
+
     return (
       <View style={styles.container}>
         <PlaceDetailModal
-        places={this.state.places}
+          selectedItem={this.state.selectedItem}
+          closeModal={this.closeModalhandler}
         />
 
-        <AddPlaceComponent 
+        <AddPlaceComponent
           submithandler={this.addPlaceHandler}
         />
 
         <PlaceContentComponent
-        places={this.state.places}
-        deletePlace={this.deletePlace}
+          places={this.state.places}
+          selectedPlace={this.selectedPlaceHandler}
         />
       </View>
     );
@@ -67,6 +74,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     // justifyContent: 'center'
     // borderWidth: 1
-  }, 
-  
+  },
+
 })

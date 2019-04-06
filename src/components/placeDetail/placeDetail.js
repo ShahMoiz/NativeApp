@@ -3,15 +3,30 @@ import React from 'react';
 import {View,Modal,  Text, Image,Button, Stylesheet} from 'react-native';
 
 const PlaceDetailModal = props => {
-        return (<Modal>
+    let selectedContent = null;
+
+    if(props.selectedItem){
+        selectedContent = 
+        <View>
+            <Image source={props.selectedItem.img} />
+            <Text>{props.selectedItem.name}</Text>
+        </View>
+    }
+
+    return (
+    
+    <Modal visible={props.selectedItem !== null}>
+        <View>
             <View>
-                <Image source={props.places.img} />
-                <Text>{props.places.name}</Text>
-                <Button title="Delete" color='red' />
-                <Button title="Close" />
+                {selectedContent}
             </View>
-        </Modal>
-        )
+            <View>
+                <Button title="Delete" color='red' />
+                <Button title="Close" onPress={props.closeModal} />
+            </View>
+        </View>
+    </Modal>
+    )
 
 }
 
