@@ -13,7 +13,7 @@ class App extends Component {
 
   addPlaceHandler = text => {
     if (text.trim() === '') return;
-
+    console.log(text)
     this.props.onAddItem(text)
   }
 
