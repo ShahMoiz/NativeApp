@@ -1,6 +1,6 @@
 import  React, {Component}  from "react";
-import {View, StyleSheet, TextInput, Button} from 'react-native';
-
+import {View, StyleSheet, TextInput, Button, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 class AddPlaceComponent extends Component {
@@ -21,14 +21,23 @@ class AddPlaceComponent extends Component {
           onChangeText={text => this.setState({placeText: text})}
           value={this.state.placeText}
           />
-        <Button 
+          <TouchableOpacity onPress={() => {
+            this.props.submithandler(this.state.placeText)
+            this.setState({placeText: ''});
+          }}>
+            <View style={styles.inputContainerButton}>
+              <Icon name="plus" size={30}
+               color="white" />
+            </View>
+          </TouchableOpacity>
+        {/* <Button 
           title="Add"
           style={styles.inputContainerButton}
           onPress={() => {
             this.props.submithandler(this.state.placeText)
             this.setState({placeText: ''});
           }}
-          />
+          /> */}
     </View>
     )
     }
@@ -40,7 +49,11 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1
     },
     inputContainerButton: {
-      width: '30%'
+      // width: 50,
+      backgroundColor: 'blue',
+      marginTop: 20,
+      height: 50
+
     },
     
     inputContainer: {
