@@ -11,32 +11,51 @@ const MainTabs = () =>{
         Navigation.setRoot({
             root: {
                 bottomTabs: {
-                    children: [
-                        {
-                            component: {
-                                name: 'Awesome-places.findPlaces',
-                                options: {
-                                    bottomTab: {
-                                        text: 15,
-                                        text: "Find Place",
-                                        icon: img[0]
-                                    }
+                    children: [{
+                        stack: {
+                            children: [{
+                                component: {
+                                    name: 'Awesome-places.findPlaces',
                                 }
-                            }
-                        },
-                        {
-                            component: {
-                                name: 'Awesome-places.viewPlaces',
-                                options: {
-                                    bottomTab: {
-                                        text: 15,
-                                        text: 'Places',
-                                        icon: img[1]
+                            }],
+                            options: {
+                                bottomTab: {
+                                    text: 15,
+                                    text: "Find Place",
+                                    icon: img[0]
+                                },
+                                topBar: {
+                                    title: {
+                                        text: 'View Awesome Places'
                                     }
                                 }
                             }
                         }
-                    ]
+                    },
+                    {
+                        stack: {
+                            children: [{
+                                component: {
+                                    name: 'Awesome-places.viewPlaces',
+                                    options: {
+                                        
+                                    }
+                                }
+                            }],
+                            options: {
+                                bottomTab: {
+                                    text: 15,
+                                    text: 'Places',
+                                    icon: img[1]
+                                },
+                                topBar: {
+                                    title: {
+                                        text: 'Share your Awesome Visited Places'
+                                    }
+                                }
+                            }
+                        }  
+                    }]   
                 }
             }
         })
