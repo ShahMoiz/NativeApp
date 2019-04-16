@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "58422987264",
+    "firebase_url": "https://rn-awsome-places-to-visit.firebaseio.com",
+    "project_id": "rn-awsome-places-to-visit",
+    "storage_bucket": "rn-awsome-places-to-visit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58422987264:android:bdda3018bb58ca0a",
+        "android_client_info": {
+          "package_name": "com.awesomeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58422987264-43eph8crbd0569p14f8ri2lh7dq18gvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUK5whDOiavdHx1X5hBeklh2713JB61f4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58422987264-43eph8crbd0569p14f8ri2lh7dq18gvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
